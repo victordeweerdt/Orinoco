@@ -1,0 +1,60 @@
+// Mixins
+
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+    padding: $padding-y $padding-x;
+    line-height: $line-height;
+  }
+
+// Sizing shortcuts
+
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+  }
+
+  
+// Fonts
+
+@mixin font($size: false,$color: false,$weight: false,$lh: false) {
+  @if $size {
+    font-size:$size;
+  }
+  @if $color {
+    color:$color;
+  }
+  @if $weight {
+    font-weight:$weight;
+  }
+  @if $lh {
+    line-height:$lh;
+  }
+}
+
+// Flex bloc
+
+@mixin flex ($flex-direction, $align-items: false, $justify: false) {
+  display: flex;
+  @if $flex-direction {
+    flex-direction:$flex-direction;
+  }
+  @if $align-items {
+    align-items:$align-items;
+  }
+  @if $justify {
+    justify-content:$justify;
+  }
+}
+
+// Taille standard d'une container
+
+@mixin basic-container {
+  width:85%;
+    margin:0 auto;
+    @media (min-width:$lg) {
+        width:80%;
+    }
+    @media (min-width:$xl) {
+        width:66.6%;
+    }
+}
