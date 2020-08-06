@@ -1,0 +1,12 @@
+.info-shipping-block {
+    padding:0 50px;
+    ul {
+        padding-bottom:1rem;
+        li:first-child {
+            font-weight: 600;
+        }
+        li {
+            list-style: none;
+        }
+    }
+}

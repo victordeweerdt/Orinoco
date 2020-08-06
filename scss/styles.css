@@ -1,3 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+h1 {
+  padding: 2rem 0;
+  font-size: 2rem;
+  color: #000000;
+  font-weight: 400;
+  line-height: initial;
+  text-align: left;
+}
+@media (min-width: 640px) {
+  h1 {
+    font-size: 3rem;
+    color: #000000;
+    font-weight: 400;
+    line-height: initial;
+    padding: 5rem 0;
+  }
+}
 
+h2 {
+  padding: 0.5rem 0px;
+  font-size: 1rem;
+  color: #000000;
+  font-weight: 400;
+  line-height: initial;
+  text-align: left;
+}
+@media (min-width: 640px) {
+  h2 {
+    font-size: 1.5rem;
+    color: #000000;
+    font-weight: 400;
+    line-height: initial;
+    padding: 0.5rem 0px;
+  }
+}
+
+a {
+  color: #000000;
+}
+a :hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 5px;
+}
+@media (min-width: 640px) {
+  header {
+    padding: 0 25px;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.menu .fas {
+  padding-right: 5px;
+}
+
+#bag {
+  padding-left: 30px;
+}
+
+#products-grid {
+  display: flex;
+  flex-direction: row;
+  padding: 0 5px;
+}
+@media (min-width: 640px) {
+  #products-grid {
+    padding: 0 25px;
+  }
+}
+#products-grid .prev-card {
+  margin-bottom: 4rem;
+}
+#products-grid .prev-card img {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+#products-grid .prev-card .subsection-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.info-shipping-block {
+  padding: 0 50px;
+}
+.info-shipping-block ul {
+  padding-bottom: 1rem;
+}
+.info-shipping-block ul li:first-child {
+  font-weight: 600;
+}
+.info-shipping-block ul li {
+  list-style: none;
+}
+
+#product-image {
+  width: 100%;
+}
+
+#product-name {
+  padding: 0 0 2rem 0;
+}
+
+#product-description {
+  max-width: 600px;
+}
+
+.form-add-to-cart {
+  display: flex;
+  flex-direction: row;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+main {
+  padding-top: 5rem;
+}
+
+.btn-lg-vic {
+  text-align: center;
+  max-width: 250px;
+  border: 1px solid #000000;
+  border-radius: 0;
+  width: 100%;
+}
+
+.select-vic {
+  max-width: 250px;
+  width: 100%;
+  margin-right: 20px;
+}
 
 /*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+h1 {
+    padding: 2rem 0;
+    @include font(2rem, $black, 400, initial);
+    text-align:left;
+    @media (min-width:$med) {
+        @include font(2*1.5rem, $black, 400, initial);
+        padding: 5rem 0;
+    }
+}
+
+h2 {
+    padding: 0.5rem 0px;
+    @include font(1rem, $black, 400, initial);
+    text-align:left;
+    @media (min-width:$med) {
+        @include font(1*1.5rem, $black, 400, initial);
+        padding: 0.5rem 0px;
+    }
+}
+
+a {
+    color:$black;
+    :hover {
+        color:$black;
+        text-decoration: none;
+    }
+}

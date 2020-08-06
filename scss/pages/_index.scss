@@ -1,0 +1,17 @@
+#products-grid {
+    @include flex(row);
+    padding:0 5px;
+    @media (min-width:$med) {
+        padding:0 25px;
+    }
+    .prev-card {
+        margin-bottom:4rem;
+        img {
+            width:100%;
+            margin-bottom:0.5rem;
+        }
+        .subsection-card {
+            @include flex(row, flex-end, space-between);
+        }
+    }
+}

@@ -1,0 +1,21 @@
+// Style header
+
+header {
+    @include flex(row, center, space-between);
+    height: 60px;
+    padding: 0 5px;
+    @media (min-width:$med) {
+        padding: 0 25px;
+    }
+}
+
+.menu {
+    @include flex(row, false, flex-end);
+    .fas {
+        padding-right:5px;
+    }
+}
+
+#bag {
+    padding-left: 30px;
+}

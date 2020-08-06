@@ -1,0 +1,15 @@
+#product-image {
+    width:100%;
+}
+
+#product-name {
+    padding:0 0 2rem 0;
+}
+
+#product-description {
+    max-width: 600px;;
+}
+
+.form-add-to-cart {
+    @include flex(row);
+}
