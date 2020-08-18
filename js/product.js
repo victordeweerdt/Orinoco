@@ -5,14 +5,6 @@ const productPrice = document.getElementById('product-price');
 const productDescription = document.getElementById('product-description');
 const s = document.getElementById('lenses-select');
 
-// Function qui affiche les informations d'un produit
-function displayCamera() {
-  productImage.src = cameras[i].imageUrl;
-  productName.innerHTML = cameras[i].name;
-  productPrice.innerHTML = tranformPrice(cameras[i].price);
-  productDescription.innerHTML = cameras[i].description;
-};
-
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('myParam');
 const id = urlParams.get('camera_id');
@@ -58,6 +50,33 @@ function showCameraInformation(camera) {
 		i++;
 	}
 	//permet de positionner la combo sur le bon champ
-	s.selectedIndex = selected;
- 
+  s.selectedIndex = selected;
+  displayCart();
+}
+
+
+// *****************************************
+// Cart Events Listener
+// ***************************************** 
+
+// Je récupère la valeur séléctionée de la lense
+document.getElementById("lenses-select").addEventListener("change", selectLensesEvent);
+
+function selectLensesEvent() {
+  let lenseSelected = event.target.value;
+  lenseSelected = "";
+  console.log(lenseSelected);
 };
+
+// Add item to Cart
+const addToCart = document.getElementById('add-to-cart');
+
+addToCart.addEventListener('click', function() {
+  event.preventDefault();
+  var name = document.getElementById('product-name').textContent;
+  var price = document.getElementById('product-price').textContent;
+  var lenses = this.lenseSelected;
+  shoppingCart.addItemToCart(name, price, lenses, 1);
+
+  displayCart();
+});

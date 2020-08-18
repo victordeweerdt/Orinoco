@@ -15,6 +15,7 @@ fetch('http://localhost:3000/api/cameras/')
 .then(function(json) {
   let cameras = json;
   showAllCameras(cameras);
+  displayCart();
 })
 .catch(function(err) {
   console.log('Fetch problem: ' + err.message);

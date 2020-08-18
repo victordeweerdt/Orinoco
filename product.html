@@ -30,8 +30,12 @@
           <a href="index.html" class="link-nav">Catalog</a>
           <span id="bag">
             <a href="cart.html">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="number">0</span>
+              <div class="dropdown">
+                <div id="bag">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p><span id="count-items">0</span> Articles</p>
+                </div>
+              </div>
             </a>
           </span>
       </nav>
@@ -44,14 +48,14 @@
       </div>
       <div class="col-6">
         <h1 id="product-name"></h1>
-        <p id="product-price"></p>
+        <p><span id="product-price"></span><span> €</span></p>
         <p id="product-description"></p>
         <form class="form-add-to-cart">
           <select class="form-control select-vic" id="lenses-select">
-            <option></option>
+            <option selected></option>
             <option></option>
           </select>
-          <button id="add-to-cart" class="btn btn-lg btn-lg-vic">Add to Cart</button>
+          <button type="button" id="add-to-cart" class="btn btn-lg btn-lg-vic">Ajouter au panier</button>
         </form>
       </div>
     </section>
@@ -61,8 +65,10 @@
   </footer>
   <!-- Add your JS here -->
   <script src="js/all.js"></script>
+  <script src="js/shopping-cart.js"></script>
   <script src="js/product.js"></script>
-  <script src="js/cart.js"></script>
+
+
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 </body>

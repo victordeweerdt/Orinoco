@@ -30,8 +30,12 @@
           <a href="index.html" class="link-nav">Catalog</a>
           <span id="bag">
             <a href="cart.html">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="number">0</span>
+              <div class="dropdown">
+                <div id="bag">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p><span id="count-items">0</span> Articles</p>
+                </div>
+              </div>
             </a>
           </span>
       </nav>
@@ -40,11 +44,72 @@
   <main class="container-fluid">
     <section class="row">
       <div class="col-2"></div>
-      <div class="col-10">
+      <div class="col-10 head">
         <h1>Cart</h1>
       </div>
     </section >
-    <section class="row">
+    <section class="row cart-content">
+      <div class="col-8" class="cart-table">
+        <div class="row">
+          <div class="col-3">
+
+          </div>
+          <div class="col-6">
+
+          </div>
+          <div class="col-3">
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+
+          </div>
+          <div class="col-9">
+            <div class="col-12">
+              <div id="subtotal">
+                
+              </div>
+              <div id="shipping">
+                
+              </div>
+              <div id="order-total">
+                
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+
+          </div>
+          <div class="col-4">
+            <button id="checkout" class="btn btn-lg btn-lg-vic">
+              <span>Checkout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 info-shipping-block">
+        <ul>
+          <li>Free Shipping</li>
+          <li>Free shipping over EUR 200</li>
+        </ul>
+        <ul>
+          <li>Money back guarantee</li>
+          <li>30-day money back guarantee</li>
+        </ul>
+        <ul>
+          <li>Manufacturer warranty</li>
+          <li>2 year warranty</li>
+        </ul>
+
+        </div>
+
+      </div>
+    </section>
+    <section class="row cart-empty">
       <div class="col-8" class="cart-table">
         <div class="row">
           <div class="col-3">
@@ -111,7 +176,7 @@
   </footer>
   <!-- Add your JS here -->
   <script src="js/all.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/shopping-cart.js"></script>
   <script src="js/cart.js"></script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->

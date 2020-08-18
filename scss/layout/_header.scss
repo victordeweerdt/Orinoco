@@ -13,9 +13,12 @@ header {
     @include flex(row, false, flex-end);
     .fas {
         padding-right:5px;
+        position:relative;
+        bottom:2px;
     }
 }
 
 #bag {
     padding-left: 30px;
+    @include flex(row, center)
 }
