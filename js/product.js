@@ -1,10 +1,3 @@
-// Ciblage des elements UI
-const productImage = document.getElementById('product-image');
-const productName = document.getElementById('product-name');
-const productPrice = document.getElementById('product-price');
-const productDescription = document.getElementById('product-description');
-const s = document.getElementById('lenses-select');
-
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('myParam');
 const id = urlParams.get('camera_id');
@@ -17,14 +10,21 @@ fetch('http://localhost:3000/api/cameras/' + id)
 .then(function(json) {
   let camera = json;
   showCameraInformation(camera);
+  eventListenerAddItemToCart(camera);
   console.log(camera);
 })
-.catch(function(err) {
-  console.log('Fetch problem: ' + err.message);
-});
+
+
 
 
 function showCameraInformation(camera) {
+
+  // Ciblage des elements UI
+  const productImage = document.getElementById('product-image');
+  const productName = document.getElementById('product-name');
+  const productPrice = document.getElementById('product-price');
+  const productDescription = document.getElementById('product-description');
+
   // On attribut les valeurs aux elements
   productImage.src = camera.imageUrl;
   productName.innerHTML = camera.name;
@@ -32,51 +32,53 @@ function showCameraInformation(camera) {
   productDescription.innerHTML = camera.description;
 
   // Insertion des valeurs de lenses dans le select
+  const selectelm = document.getElementById('lenses-select');
   const allLenses = camera.lenses;
-  var selected;
-  var selectedKey = [0];
-	var i=0;
-	s.options.length = 0;
- 
-	for (var key in allLenses) 
-	{
+  let selected;
+  let selectedKey = [0];
+	let i = 0;
+	selectelm.options.length = 0;
+	for (var key in allLenses) {
 		// permet de choisir le champ à définir par défaut
-		if (selectedKey == key) 
-		{
-			selected = i;
-		}
- 
-		s.options[s.length] = new Option(allLenses[key],key);
+		if (selectedKey == key) {
+        selected = i;
+    }
+		selectelm.options[selectelm.length] = new Option(allLenses[key],key);
 		i++;
 	}
 	//permet de positionner la combo sur le bon champ
-  s.selectedIndex = selected;
+  selectelm.selectedIndex = selected;
+
   displayCart();
 }
 
 
-// *****************************************
-// Cart Events Listener
-// ***************************************** 
+function eventListenerAddItemToCart(camera) {
 
-// Je récupère la valeur séléctionée de la lense
-document.getElementById("lenses-select").addEventListener("change", selectLensesEvent);
-
-function selectLensesEvent() {
-  let lenseSelected = event.target.value;
-  lenseSelected = "";
-  console.log(lenseSelected);
-};
-
-// Add item to Cart
-const addToCart = document.getElementById('add-to-cart');
-
-addToCart.addEventListener('click', function() {
-  event.preventDefault();
-  var name = document.getElementById('product-name').textContent;
-  var price = document.getElementById('product-price').textContent;
-  var lenses = this.lenseSelected;
-  shoppingCart.addItemToCart(name, price, lenses, 1);
-
-  displayCart();
-});
+  // CART EVENT LISTENER
+  const selectelm = document.getElementById('lenses-select');
+  const addToCart = document.getElementById('add-to-cart');
+  addToCart.addEventListener('click', function() {
+    const lense = selectelm.value;
+    let item = new Item(camera, lense);
+    // test
+    console.log(item);
+    if (localStorage.getItem('shoppingCart') === null) {
+      localStorage.setItem('shoppingCart', JSON.stringify([item]));
+    } else {
+      shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+      // Je vérifie que la camera n'est pas dans le panier et ajoute une quantité si c'est le cas
+      // for(let item in shoppingCart) {
+        // if(shoppingCart[item].camera === camera) {
+          // shoppingCart[item].count ++;
+          // shoppingCart.push(item);
+          // localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+          // return;
+        // }
+      // }
+      shoppingCart.push(item);
+      localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+    }
+    displayCart();
+  });
+}

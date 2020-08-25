@@ -12,4 +12,20 @@
 
 .form-add-to-cart {
     @include flex(row);
+    margin-top: 2rem;
+}
+
+#product {
+    border-top:1px solid #000;
+    width: 80%;
+    margin: 8rem auto;
+    .right-side {
+        border-bottom: 1px solid #000;
+        border-left: 1px solid #000;
+        border-right: 1px solid #000;
+        padding: 4rem 40px 0 40px;
+    }
+    .left-side {
+        padding: 0;
+    }
 }

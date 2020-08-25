@@ -10,3 +10,101 @@
         }
     }
 }
+
+.cart-content {
+    display:flex;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.cart-empty {
+    display:flex;
+}
+
+#cart-items {
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
+    border-right: 1px solid #000000;
+    padding-left:0;
+    padding-right:0;
+}
+
+#checkout {
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    padding: 0;
+    @include flex(column, false, flex-end);
+}
+
+#back-to-shopping {
+    margin-top:2rem;
+}
+
+.item {
+    @include flex(row, center);
+    border-bottom: 1px solid #000000;
+    border-left: 2px solid #000000;
+    &__image {
+        width:33.33%;
+    }
+    &__name-lenses {
+        padding-left: 40px;
+        width:33.33%;
+    }
+    &__qty {
+        text-align: right;
+        width:16.66%;
+    }
+    &__price {
+        text-align: right;
+        width:16.66%;
+        padding-right: 40px;
+    }
+}
+
+#back-link {
+    padding-left: 25px;
+    @include flex(row);
+    p {
+        padding-left:20px;
+    }
+}
+
+.item-minus {
+    width: 30px;
+    height: 30px;
+    border: none;
+    margin-right: 10px;
+}
+
+.item-plus {
+    width: 30px;
+    height: 30px;
+    border: none;
+    margin-left: 10px;
+}
+
+.subtotal {
+    @include flex(row, false, space-between);
+    padding: 0 40px;
+}
+
+.shipping-text {
+    margin-top:2rem;
+    padding: 0 40px;
+}
+
+.full-btn {
+    text-align: center;
+    border: 1px solid #000000;
+    border-radius: 0;
+    width: 100%;
+    font-size: 1rem;
+}
+
+#procced-checking {
+    background: $black;
+    color: $white;
+}

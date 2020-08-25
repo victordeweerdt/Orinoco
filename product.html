@@ -42,20 +42,24 @@
 
   </header>
   <main class="container-fluid">
-    <section class="row">
-      <div class="col-6">
+    <section>
+      <a id="back-link" href="#">
+        <i class="fas fa-arrow-left"></i>
+        <p>Back to shopping</p>
+      </a>
+    </section>
+    <section id="product" class="row">
+      <div class="col-6 left-side">
         <img id="product-image">
       </div>
-      <div class="col-6">
+      <div class="col-6 right-side">
         <h1 id="product-name"></h1>
-        <p><span id="product-price"></span><span> €</span></p>
         <p id="product-description"></p>
         <form class="form-add-to-cart">
           <select class="form-control select-vic" id="lenses-select">
             <option selected></option>
-            <option></option>
           </select>
-          <button type="button" id="add-to-cart" class="btn btn-lg btn-lg-vic">Ajouter au panier</button>
+          <button type="button" id="add-to-cart" class="btn btn-lg btn-lg-vic"><span id="product-price"></span><span> €</span> -- Add to cart</button>
         </form>
       </div>
     </section>

@@ -52,7 +52,7 @@ function showAllCameras(cameras) {
     // Raccord aux propriétés de l'objet
     productImage.src = cameras[i].imageUrl;
     productName.innerHTML = cameras[i].name;
-    productPrice.innerHTML = tranformPrice(cameras[i].price); 
+    productPrice.innerHTML = tranformPrice(cameras[i].price) + " €"; 
 
   }
 };

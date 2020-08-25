@@ -15,7 +15,7 @@
   <!-- Place favicon.ico in the root directory -->
 
   <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="scss/styles.css">
+  <link rel="stylesheet" href="scss/index.css">
   <link rel="stylesheet" href="css/all.css">
 
 </head>
@@ -25,19 +25,29 @@
   <!-- Add your site or application content here -->
   <header>
 
-      <a href="index.html" class="main-logo col-6">Orinoco</a>
-      <nav class="menu col-6">
-          <a href="index.html" class="link-nav">Catalog</a>
-          <div class="dropdown">
-            <div id="bag">
-                <i class="fas fa-shopping-bag"></i>
-                <p><span id="count-items">0</span> Articles</p>
+    <a href="index.html" class="main-logo col-6">Orinoco</a>
+    <nav class="menu col-6">
+        <a href="index.html" class="link-nav">Catalog</a>
+        <span id="bag">
+          <a href="cart.html">
+            <div class="dropdown">
+              <div id="bag">
+                  <i class="fas fa-shopping-bag"></i>
+                  <p><span id="count-items">0</span> Articles</p>
+              </div>
             </div>
-          </div>
-      </nav>
+          </a>
+        </span>
+    </nav>
 
   </header>
   <main class="container-fluid">
+    <section>
+      <a id="back-link" href="#">
+        <i class="fas fa-arrow-left"></i>
+        <p>Back to shopping</p>
+      </a>
+    </section>
     <section id="products-grid" class="row">
 
     </section>
@@ -50,7 +60,6 @@
   <script src="js/all.js"></script>
   <script src="js/shopping-cart.js"></script>
   <script src="js/index.js"></script>
-  <script src="js/cart.js"></script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 </body>

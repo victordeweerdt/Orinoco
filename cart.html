@@ -42,69 +42,33 @@
 
   </header>
   <main class="container-fluid">
-    <section class="row">
-      <div class="col-2"></div>
-      <div class="col-10 head">
-        <h1>Cart</h1>
+    <section>
+      <a id="back-link" href="#">
+        <i class="fas fa-arrow-left"></i>
+        <p>Back to shopping</p>
+      </a>
+    </section>
+    <section class="row head-title">
+      <div id="head" class="col-12">
+        <h1>My order</h1>
       </div>
     </section >
     <section class="row cart-content">
-      <div class="col-8" class="cart-table">
-        <div class="row">
-          <div class="col-3">
-
-          </div>
-          <div class="col-6">
-
-          </div>
-          <div class="col-3">
-            
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3">
-
-          </div>
-          <div class="col-9">
-            <div class="col-12">
-              <div id="subtotal">
-                
-              </div>
-              <div id="shipping">
-                
-              </div>
-              <div id="order-total">
-                
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-
-          </div>
-          <div class="col-4">
-            <button id="checkout" class="btn btn-lg btn-lg-vic">
-              <span>Checkout</span>
-            </button>
-          </div>
-        </div>
+      <div class="col-8" id="cart-items">
       </div>
-      <div class="col-4 info-shipping-block">
-        <ul>
-          <li>Free Shipping</li>
-          <li>Free shipping over EUR 200</li>
-        </ul>
-        <ul>
-          <li>Money back guarantee</li>
-          <li>30-day money back guarantee</li>
-        </ul>
-        <ul>
-          <li>Manufacturer warranty</li>
-          <li>2 year warranty</li>
-        </ul>
-
+      <div id="checkout" class="col-4">
+        <div class="subtotal">
+          <h2>Subtotal</h2>
+          <h2><span id="cart-total"></span><span> €</span></h2>
+        </div>
+        <div class="shipping-text">
+          <p>Shipping and taxes calculated at checkout.</p>
+        </div>
+        <div>
+          <button href="index.html" id="back-to-shopping" type="button" class="full-btn btn btn-lg">Continue shopping</button>
+        </div>
+        <div>
+          <button id="procced-checking" type="button" class="full-btn btn btn-lg">Procced to checking</button>
         </div>
 
       </div>
@@ -113,61 +77,19 @@
       <div class="col-8" class="cart-table">
         <div class="row">
           <div class="col-3">
-
-          </div>
-          <div class="col-6">
-
-          </div>
-          <div class="col-3">
             
           </div>
-        </div>
-        <div class="row">
-          <div class="col-3">
-
-          </div>
-          <div class="col-9">
-            <div class="col-12">
-              <div id="subtotal">
-                
-              </div>
-              <div id="shipping">
-                
-              </div>
-              <div id="order-total">
-                
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-
+          <div class="col-5">
+            <p>Your Cart is empty.</p>
           </div>
           <div class="col-4">
-            <button id="checkout" class="btn btn-lg btn-lg-vic">
-              <span>Checkout</span>
+            <button id="back-shopping" class="btn btn-lg btn-lg-vic">
+              <span>Continuer le shopping</span>
             </button>
           </div>
         </div>
       </div>
-      <div class="col-4 info-shipping-block">
-        <ul>
-          <li>Free Shipping</li>
-          <li>Free shipping over EUR 200</li>
-        </ul>
-        <ul>
-          <li>Money back guarantee</li>
-          <li>30-day money back guarantee</li>
-        </ul>
-        <ul>
-          <li>Manufacturer warranty</li>
-          <li>2 year warranty</li>
-        </ul>
-
-        </div>
-
+      <div class="col-4">
       </div>
     </section>
   </main>

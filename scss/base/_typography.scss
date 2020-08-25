@@ -6,7 +6,7 @@ h1 {
     text-align:left;
     @media (min-width:$med) {
         @include font(2*1.5rem, $black, 400, initial);
-        padding: 5rem 0;
+        padding: 2rem 0 5rem 0;
     }
 }
 

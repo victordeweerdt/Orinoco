@@ -4,8 +4,19 @@ header {
     @include flex(row, center, space-between);
     height: 60px;
     padding: 0 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: white;
+    border-bottom: 1px solid #000;
     @media (min-width:$med) {
         padding: 0 25px;
+    }
+    text-transform: uppercase;
+    .main-logo {
+        font-weight:500;
     }
 }
 
@@ -19,6 +30,6 @@ header {
 }
 
 #bag {
-    padding-left: 30px;
+    padding-left: 50px;
     @include flex(row, center)
 }

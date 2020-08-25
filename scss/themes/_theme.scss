@@ -3,19 +3,40 @@ body {
 }
 
 main {
-    padding-top:5rem;
+    padding-top:5.5rem;
+    border-top: 1px solid #000000;
 }
 
 .btn-lg-vic {
     text-align: center;
-    max-width: 250px;
+    max-width: 300px;
     border: 1px solid #000000;
     border-radius: 0;
     width: 100%;
+    font-size: 1rem;
 }
 
 .select-vic {
-    max-width:250px;
-    width:100%;
-    margin-right: 20px;
+    text-align: center;
+    max-width: 300px;
+    border: 1px solid #000000;
+    border-radius: 0;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    height: 49px;
+}
+
+#head {
+    padding-left:11%;
+}
+
+.head-title {
+    margin-top: 2rem;
+}
+
+#add-to-cart {
+    background: $black;
+    color: $white;
 }
