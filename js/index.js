@@ -30,7 +30,7 @@ function showAllCameras(cameras) {
     let subSectionCard = document.createElement('div')
     let productImage = document.createElement('img');
     let productName = document.createElement('h2');
-    let productPrice = document.createElement('p');
+    let productPrice = document.createElement('h2');
     let productLink = document.createElement('a');
 
     // Ajout d'un query param pour chaque URL de chaque produit

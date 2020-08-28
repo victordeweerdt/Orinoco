@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Cart - Orinoco</title>
+  <title>Confirmation - Orinoco</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,7 +15,7 @@
   <!-- Place favicon.ico in the root directory -->
 
   <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="scss/styles.css">
+  <link rel="stylesheet" href="scss/checkout.css">
   <link rel="stylesheet" href="css/all.css">
 
 </head>
@@ -42,26 +42,13 @@
 
   </header>
   <main class="container-fluid">
-    <section>
-      <a id="back-link" href="#">
-        <i class="fas fa-arrow-left"></i>
-        <p>Back to catalog</p>
-      </a>
-    </section>
-    <section id="product" class="row">
+    <section id="confirmation" class="main-block row">
       <div class="col-6 left-side">
-        <img id="product-image">
-      </div>
-      <div class="col-6 right-side">
-        <h1 id="product-name"></h1>
-        <p id="product-description"></p>
-        <form class="form-add-to-cart">
-          <select class="form-control select-vic" id="lenses-select">
-            <option selected></option>
-          </select>
-          <button type="button" id="add-to-cart" class="btn btn-lg btn-lg-vic"><span id="product-price"></span><span> €</span> -- Add to cart</button>
-        </form>
-      </div>
+        <h1>Thank you for your order.</h1>
+        <p class="h2">Price : <span id="final-price">8993 €</span></p>
+        <p class="h2">Your number’s order is : <span id="number-order">098H786F</span></p>
+        <a href="index.html" class="large-btn btn btn-lg">Back to homepage</a>
+      </div>     
     </section>
   </main>
   <footer>
@@ -70,9 +57,7 @@
   <!-- Add your JS here -->
   <script src="js/all.js"></script>
   <script src="js/shopping-cart.js"></script>
-  <script src="js/product.js"></script>
-
-
+  <script src="js/checkout.js"></script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 </body>

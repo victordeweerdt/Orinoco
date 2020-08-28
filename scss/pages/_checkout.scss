@@ -1,0 +1,83 @@
+#order-info {
+    .left-side {
+        h2 {
+            margin-bottom:1.5rem;
+        }
+        form {
+            margin-bottom:2rem;
+        }
+    }
+}
+
+#back-link {
+    padding-left: 25px;
+    @include flex(row);
+    p {
+        padding-left:20px;
+    }
+}
+
+.form-group {
+    label {
+        margin-bottom:1rem;
+    }
+}
+
+.form-control {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0;
+    border: 1px solid #EAEAEA;
+}
+
+#cart-items {
+    .item {
+        width:100%;
+        @include flex(row, center, false);
+        margin-bottom:1rem;
+        img {
+            width:25%;
+        }
+        .item__name-lenses {
+            width:41.68%;
+            padding-left:20px;
+        }
+        .item__qty {
+            width: 16.66%;
+            text-align:right;
+        }
+        .item__price {
+            width: 16.66%;
+            text-align:right;
+        }
+    }
+}
+
+.bottom-buttons {
+    @include flex(row);
+    padding-top:3rem;
+    div {
+        width:100%;
+    }
+}
+
+.subtotal {
+    @include flex(row, false, space-between);
+}
+
+.shipping-text {
+    margin-top:2rem;
+}
+
+#total {
+    padding: 2rem 0;
+}
+
+#confirmation {
+    h1 {
+        font-size:5rem;
+    }
+    a {
+        margin-top: 2rem;
+    }
+}

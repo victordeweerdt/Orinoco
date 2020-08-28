@@ -68,7 +68,7 @@ function showItemsInCart() {
     // Liens avec les propriétés
     itemImage.src = shoppingCartGrouped[i][0].camera.imageUrl;
     itemName.innerText = shoppingCartGrouped[i][0].camera.name;
-    itemQty.innerText = "Quantity : " + shoppingCartGrouped[i].length;
+    itemQty.innerText = "Qty : " + shoppingCartGrouped[i].length;
     
     itemPrice.innerText = totalPrice + ' €';
     itemLenses.innerText = "Lenses : " + displayLensesPerName(i);

@@ -48,15 +48,10 @@
         <p>Back to shopping</p>
       </a>
     </section>
-    <section class="row head-title">
-      <div id="head" class="col-12">
-        <h1>My order</h1>
+    <section id="shopping-cart" class="main-block row cart-content">
+      <div class="col-12" id="cart-items">
       </div>
-    </section >
-    <section class="row cart-content">
-      <div class="col-8" id="cart-items">
-      </div>
-      <div id="checkout" class="col-4">
+      <div id="checkout" class="col-12">
         <div class="subtotal">
           <h2>Subtotal</h2>
           <h2><span id="cart-total"></span><span> €</span></h2>
@@ -64,17 +59,18 @@
         <div class="shipping-text">
           <p>Shipping and taxes calculated at checkout.</p>
         </div>
-        <div>
-          <button href="index.html" id="back-to-shopping" type="button" class="full-btn btn btn-lg">Continue shopping</button>
+        <div class="bottom-buttons">
+          <div>
+            <a href="index.html" id="back-to-shopping" type="button" class="full-btn btn btn-lg">Continue shopping</a>
+          </div>
+          <div>
+            <a href="checkout.html" id="procced-checking" type="button" class="full-btn btn btn-lg">Procced to checking</a>
+          </div>
         </div>
-        <div>
-          <button id="procced-checking" type="button" class="full-btn btn btn-lg">Procced to checking</button>
-        </div>
-
       </div>
     </section>
     <section class="row cart-empty">
-      <div class="col-8" class="cart-table">
+      <div class="col-12" class="cart-table">
         <div class="row">
           <div class="col-3">
             
@@ -83,9 +79,9 @@
             <p>Your Cart is empty.</p>
           </div>
           <div class="col-4">
-            <button id="back-shopping" class="btn btn-lg btn-lg-vic">
+            <a id="back-shopping" class="btn btn-lg btn-lg-vic">
               <span>Continuer le shopping</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

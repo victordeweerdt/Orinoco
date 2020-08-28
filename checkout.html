@@ -1,0 +1,127 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Checkout - Orinoco</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="scss/checkout.css">
+  <link rel="stylesheet" href="css/all.css">
+
+</head>
+
+<body>
+
+  <!-- Add your site or application content here -->
+  <header>
+
+      <a href="index.html" class="main-logo col-6">Orinoco</a>
+      <nav class="menu col-6">
+          <a href="index.html" class="link-nav">Catalog</a>
+          <span id="bag">
+            <a href="cart.html">
+              <div class="dropdown">
+                <div id="bag">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p><span id="count-items">0</span> Articles</p>
+                </div>
+              </div>
+            </a>
+          </span>
+      </nav>
+
+  </header>
+  <main class="container-fluid">
+    <section>
+      <a id="back-link" href="cart.html">
+        <i class="fas fa-arrow-left"></i>
+        <p>Back to cart</p>
+      </a>
+    </section>
+    <section id="order-info" class="main-block row">
+      <div class="col-6 left-side">
+        <h2>Contact Informations</h2>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+        </form>
+        <h2>Shipping adress</h2>
+        <form>
+          <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="First name">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Last name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Address 2</label>
+            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">City</label>
+              <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputState">State</label>
+              <select id="inputState" class="form-control">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputZip">Zip</label>
+              <input type="text" class="form-control" id="inputZip">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-6 right-side">
+        <div id="cart-items"></div>
+        <div id="total" class="col-12">
+          <div class="subtotal">
+            <h2>Subtotal</h2>
+            <h2><span id="cart-total"></span><span> €</span></h2>
+          </div>
+          <div class="shipping-text">
+            <p>Shipping and taxes calculated at checkout.</p>
+          </div>
+          <div class="bottom-buttons">
+            <div>
+              <a href="" id="confirmation" type="button" class="full-btn btn btn-lg">Confirm order</a>
+            </div>
+          </div>
+        </div>
+      </div>      
+    </section>
+  </main>
+  <footer>
+
+  </footer>
+  <!-- Add your JS here -->
+  <script src="js/all.js"></script>
+  <script src="js/shopping-cart.js"></script>
+  <script src="js/checkout.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+</body>
+
+</html>

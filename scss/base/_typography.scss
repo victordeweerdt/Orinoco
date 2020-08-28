@@ -5,19 +5,19 @@ h1 {
     @include font(2rem, $black, 400, initial);
     text-align:left;
     @media (min-width:$med) {
-        @include font(2*1.5rem, $black, 400, initial);
+        @include font(2rem, $black, 400, initial);
         padding: 2rem 0 5rem 0;
     }
 }
 
 h2 {
-    padding: 0.5rem 0px;
-    @include font(1rem, $black, 400, initial);
+    @include font(1.2rem, $black, 400, initial);
     text-align:left;
-    @media (min-width:$med) {
-        @include font(1*1.5rem, $black, 400, initial);
-        padding: 0.5rem 0px;
-    }
+}
+
+.h2 {
+    @include font(1.2rem, $black, 400, initial);
+    text-align:left;
 }
 
 a {

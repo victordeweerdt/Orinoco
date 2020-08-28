@@ -165,6 +165,86 @@ header .main-logo {
   display: none;
 }
 
+#order-info .left-side h2 {
+  margin-bottom: 1.5rem;
+}
+#order-info .left-side form {
+  margin-bottom: 2rem;
+}
+
+#back-link {
+  padding-left: 25px;
+  display: flex;
+  flex-direction: row;
+}
+#back-link p {
+  padding-left: 20px;
+}
+
+.form-group label {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  padding: 1.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0;
+  border: 1px solid #EAEAEA;
+}
+
+#cart-items .item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+#cart-items .item img {
+  width: 25%;
+}
+#cart-items .item .item__name-lenses {
+  width: 41.68%;
+  padding-left: 20px;
+}
+#cart-items .item .item__qty {
+  width: 16.66%;
+  text-align: right;
+}
+#cart-items .item .item__price {
+  width: 16.66%;
+  text-align: right;
+}
+
+.bottom-buttons {
+  display: flex;
+  flex-direction: row;
+  padding-top: 3rem;
+}
+.bottom-buttons div {
+  width: 100%;
+}
+
+.subtotal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.shipping-text {
+  margin-top: 2rem;
+}
+
+#total {
+  padding: 2rem 0;
+}
+
+#confirmation h1 {
+  font-size: 5rem;
+}
+#confirmation a {
+  margin-top: 2rem;
+}
+
 body {
   font-family: "Roboto", sans-serif;
 }
@@ -233,4 +313,4 @@ main {
   padding: 0.7rem 1rem;
 }
 
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=checkout.css.map */

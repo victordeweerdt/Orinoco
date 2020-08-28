@@ -43,7 +43,7 @@ function showCameraInformation(camera) {
 		if (selectedKey == key) {
         selected = i;
     }
-		selectelm.options[selectelm.length] = new Option(allLenses[key],key);
+		selectelm.options[selectelm.length] = new Option(allLenses[key],allLenses[key]);
 		i++;
 	}
 	//permet de positionner la combo sur le bon champ

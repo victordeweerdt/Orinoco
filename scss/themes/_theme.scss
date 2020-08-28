@@ -7,6 +7,13 @@ main {
     border-top: 1px solid #000000;
 }
 
+
+.main-block {
+    display: flex;
+    width: 70%;
+    margin: 8rem auto;
+}
+
 .btn-lg-vic {
     text-align: center;
     max-width: 300px;
@@ -29,7 +36,7 @@ main {
 }
 
 #head {
-    padding-left:11%;
+    padding-left:10%;
 }
 
 .head-title {
@@ -39,4 +46,23 @@ main {
 #add-to-cart {
     background: $black;
     color: $white;
+}
+
+.full-btn {
+    text-align: center;
+    border: 1px solid #000000;
+    border-radius: 0;
+    width: 100%;
+    font-size: 1rem;
+    padding:0.7rem 1rem;
+}
+
+.large-btn {
+    text-align: center;
+    border: 1px solid #000000;
+    border-radius: 0;
+    max-width: 200px;
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
 }
