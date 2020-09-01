@@ -11,20 +11,7 @@ fetch('http://localhost:3000/api/cameras/')
   let cameras = json;
   console.log(cameras);
   showItemsInCart();
-  checkCart();
 })
-
-
-// Vérifier si le panier est vide
-function checkCart() {
-  shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-  if (shoppingCart === null) {
-      cartContent.style.display = "none";
-  } else {
-      cartEmpty.style.display = "none";
-  }
-}
-
 
 /// Fonction qui va afficher toutes les cameras du panier
 function showItemsInCart() {
@@ -68,7 +55,7 @@ function showItemsInCart() {
     // Liens avec les propriétés
     itemImage.src = shoppingCartGrouped[i][0].camera.imageUrl;
     itemName.innerText = shoppingCartGrouped[i][0].camera.name;
-    itemQty.innerText = "Qty : " + shoppingCartGrouped[i].length;
+    itemQty.innerText = "Quantity : " + shoppingCartGrouped[i].length;
     
     itemPrice.innerText = totalPrice + ' €';
     itemLenses.innerText = "Lenses : " + displayLensesPerName(i);
@@ -118,3 +105,63 @@ function countTotalCart() {
   });
   return som;
 }
+
+// SUBMIT LISTENER FOR FORM
+document.forms["myForm"].addEventListener('submit', function(event) {
+
+  let error = document.getElementById("error");
+
+  let inputs = this;
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].style.border = "1px solid #EAEAEA";
+    if (!inputs[i].value) {
+      inputs[i].style.border = "1px solid red";
+      error.innerHTML = "Please fill the field.";
+      event.preventDefault();
+      break;
+    }
+  }
+
+  // Mes Regex
+  // Email
+  let myEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+  if (!myEmailRegex.test(inputs["email"].value)) {
+    error.innerHTML = "Your email is incorrect.";
+    inputs["email"].style.border = "1px solid red";
+    event.preventDefault();
+    break;
+  }
+
+  // Names
+  let myNameRegex = /^[a-zA-Z-/s]+$/;
+  if (!myNameRegex.test(inputs["name"].value)) {
+    error.innerHTML = "Your name is incorrect.";
+    inputs["name"].style.border = "1px solid red";
+    event.preventDefault();
+    break;
+  }
+
+  // Zip
+  let myZipRegex = /^[0-9/s]+$/;
+  if (!myZipRegex.test(inputs["zip"].value)) {
+    error.innerHTML = "Your zip code is incorrect.";
+    inputs["zip"].style.border = "1px solid red";
+    event.preventDefault();
+    break;
+  }
+
+  // Phone number
+  let myPhoneRegex = /^\+?[0-9()/s]+$/;
+  if (!myPhoneRegex.test(inputs["phone"].value)) {
+    error.innerHTML = "Your phone number is incorrect.";
+    inputs["phone"].style.border = "1px solid red";
+    event.preventDefault();
+    break;
+  }
+
+});
+
+
+
+

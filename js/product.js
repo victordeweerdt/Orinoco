@@ -67,15 +67,6 @@ function eventListenerAddItemToCart(camera) {
       localStorage.setItem('shoppingCart', JSON.stringify([item]));
     } else {
       shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-      // Je vérifie que la camera n'est pas dans le panier et ajoute une quantité si c'est le cas
-      // for(let item in shoppingCart) {
-        // if(shoppingCart[item].camera === camera) {
-          // shoppingCart[item].count ++;
-          // shoppingCart.push(item);
-          // localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
-          // return;
-        // }
-      // }
       shoppingCart.push(item);
       localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
     }

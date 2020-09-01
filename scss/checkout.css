@@ -245,6 +245,10 @@ header .main-logo {
   margin-top: 2rem;
 }
 
+#error {
+  color: red;
+}
+
 body {
   font-family: "Roboto", sans-serif;
 }
