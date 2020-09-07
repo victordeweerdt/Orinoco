@@ -58,9 +58,15 @@
           </div>
           <h2>Shipping adress</h2>
           <div id="shopping-form">
-            <div class="form-group">
-              <label for="idName">First Name & Last Name</label>
-              <input type="text" name="name" id="idName" class="form-control" placeholder="Jean Dupont">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="idFirstName">First Name</label>
+                <input type="text" name="firstName" id="idFirstName" class="form-control" placeholder="Jean">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="idLastName">Last Name</label>
+                <input type="text" name="lastName" id="idLastName" class="form-control" placeholder="Dupont">
+              </div>
             </div>
             <div class="form-group">
               <label for="idAdress">Address</label>
@@ -89,7 +95,7 @@
               </div>
             </div>
           </div>
-          <button id="submitButton" type="submit" name="valid" value="Confirm order" class="btn btn-lg">Confirm order</button>
+          <button id="submitButton" type="submit" name="valid" value="Confirm order" class="full-btn btn">Confirm order</button>
         </form>
         <p id="error"></p>
       </div>
@@ -102,11 +108,6 @@
           </div>
           <div class="shipping-text">
             <p>Shipping and taxes calculated at checkout.</p>
-          </div>
-          <div class="bottom-buttons">
-            <div>
-              <a href="" id="confirmation" type="button" class="full-btn btn btn-lg">Confirm order</a>
-            </div>
           </div>
         </div>
       </div>      

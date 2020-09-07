@@ -49,7 +49,7 @@ function showItemsInCart() {
     itemQty.classList.add('item__qty');
     let itemPrice = document.createElement('p');
     itemPrice.classList.add('item__price');
-    let itemLenses = document.createElement('p');
+    let itemLenses = document.createElement('ul');
     itemLenses.classList.add('item__lenses');
     let totalCart = document.getElementById('cart-total');
 
@@ -71,7 +71,7 @@ function showItemsInCart() {
     itemQty.innerText = "Quantity : " + shoppingCartGrouped[i].length;
     
     itemPrice.innerText = totalPrice + ' €';
-    itemLenses.innerText = "Lenses : " + displayLensesPerName(i);
+    itemLenses.innerHTML = displayLensesPerName(i);
     totalCart.innerText = tranformPrice(countTotalCart(shoppingCart));
 
     displayCart();
@@ -104,9 +104,9 @@ function displayLensesPerName(camera) {
   let displayLensesGrouped = groupLensesByName(camera);
   result = '';
   for (let lense in displayLensesGrouped) {
-    result += (lense + " (" + displayLensesGrouped[lense].length + ")") + '';
-    return result;
+    result += ("<li>" + lense + " (" + displayLensesGrouped[lense].length + ")</li>") + '';
   }
+  return result;
 }
 
 

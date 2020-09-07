@@ -16,3 +16,4 @@ function displayCart() {
   let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
   countItem.innerText = shoppingCart ? shoppingCart.length : 0;
 }
+displayCart();

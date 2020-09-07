@@ -36,7 +36,7 @@ function showItemsInCart() {
     itemQty.classList.add('item__qty');
     let itemPrice = document.createElement('p');
     itemPrice.classList.add('item__price');
-    let itemLenses = document.createElement('p');
+    let itemLenses = document.createElement('ul');
     itemLenses.classList.add('item__lenses');
     let totalCart = document.getElementById('cart-total');
 
@@ -55,10 +55,10 @@ function showItemsInCart() {
     // Liens avec les propriétés
     itemImage.src = shoppingCartGrouped[i][0].camera.imageUrl;
     itemName.innerText = shoppingCartGrouped[i][0].camera.name;
-    itemQty.innerText = "Quantity : " + shoppingCartGrouped[i].length;
+    itemQty.innerText = "Qty : " + shoppingCartGrouped[i].length;
     
     itemPrice.innerText = totalPrice + ' €';
-    itemLenses.innerText = "Lenses : " + displayLensesPerName(i);
+    itemLenses.innerHTML = displayLensesPerName(i);
     totalCart.innerText = tranformPrice(countTotalCart(shoppingCart));
 
     displayCart();
@@ -91,9 +91,9 @@ function displayLensesPerName(camera) {
   let displayLensesGrouped = groupLensesByName(camera);
   result = '';
   for (let lense in displayLensesGrouped) {
-    result += (lense + " (" + displayLensesGrouped[lense].length + ")") + '';
-    return result;
+    result += ("<li>" + lense + " (" + displayLensesGrouped[lense].length + ")</li>") + '';
   }
+  return result;
 }
 
 
@@ -106,15 +106,17 @@ function countTotalCart() {
   return som;
 }
 
-// SUBMIT LISTENER FOR FORM
+// SUBMIT LISTENER pour le submit du formulaire
 document.forms["myForm"].addEventListener('submit', function(event) {
+
+  event.preventDefault();
 
   let error = document.getElementById("error");
 
   let inputs = this;
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].style.border = "1px solid #EAEAEA";
-    if (!inputs[i].value) {
+    if (!inputs[i].value && i != 3) {
       inputs[i].style.border = "1px solid red";
       error.innerHTML = "Please fill the field.";
       event.preventDefault();
@@ -122,7 +124,7 @@ document.forms["myForm"].addEventListener('submit', function(event) {
     }
   }
 
-  // Mes Regex
+  // MES REGEX
   // Email
   let myEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -130,38 +132,64 @@ document.forms["myForm"].addEventListener('submit', function(event) {
     error.innerHTML = "Your email is incorrect.";
     inputs["email"].style.border = "1px solid red";
     event.preventDefault();
-    break;
+    return false;
   }
 
   // Names
-  let myNameRegex = /^[a-zA-Z-/s]+$/;
+  let myNameRegex = /^[a-zA-Z-\s]+$/;
   if (!myNameRegex.test(inputs["name"].value)) {
     error.innerHTML = "Your name is incorrect.";
     inputs["name"].style.border = "1px solid red";
     event.preventDefault();
-    break;
+    return false;
   }
 
   // Zip
-  let myZipRegex = /^[0-9/s]+$/;
+  let myZipRegex = /^[0-9\s]+$/;
   if (!myZipRegex.test(inputs["zip"].value)) {
     error.innerHTML = "Your zip code is incorrect.";
     inputs["zip"].style.border = "1px solid red";
     event.preventDefault();
-    break;
+    return false;
   }
 
   // Phone number
-  let myPhoneRegex = /^\+?[0-9()/s]+$/;
+  let myPhoneRegex = /^\+?[0-9()\s]+$/;
   if (!myPhoneRegex.test(inputs["phone"].value)) {
     error.innerHTML = "Your phone number is incorrect.";
     inputs["phone"].style.border = "1px solid red";
     event.preventDefault();
-    break;
+    return false;
   }
+
+  // Création d'une requète pour envoie des données client
+  // Sortir le tableau des produits avec un map
+  fetch('http://localhost:3000/api/cameras/order', {
+    method: 'post',
+    body: buildOrderData(shoppingCart, this)
+  }).then(function (response) {
+    return response.json();
+  }).then(function (text) {
+    console.log(text);
+    // window.location = 'confirmation.html';
+  })
 
 });
 
+// Cette fonction va générer un nombre qui définira le numéro de commande
+function generateTrackingNumber() {
+  return Math.floor(Math.random() * 1000000);
+}
 
-
-
+// Cette fonction va construire l'element que l'on va envoyer lors du submit du formulaire
+function buildOrderData(cart, inputs) {
+  let products = cart.map(objectCamera => objectCamera.camera._id)
+  let contact = {
+       firstName: inputs[1].value,
+       lastName: inputs[2].value,
+       address: inputs[3].value,
+       city: inputs[5].value,
+       email: inputs[0].value
+  }
+  return contact + products;
+}
