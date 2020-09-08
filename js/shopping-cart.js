@@ -12,8 +12,13 @@ class Item {
 
 // Affichage du nombre d'article dans le panier displayCart()
 function displayCart() {
-  let countItem = document.querySelector('#count-items');
-  let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-  countItem.innerText = shoppingCart ? shoppingCart.length : 0;
+  if (localStorage.getItem('shoppingCart') === null) {
+    let countItem = document.querySelector('#count-items');
+    countItem.innerText = 0;
+  } else {
+    let countItem = document.querySelector('#count-items');
+    let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+    countItem.innerText = shoppingCart ? shoppingCart.length : 0;
+  }
 }
 displayCart();

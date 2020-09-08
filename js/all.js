@@ -4,6 +4,7 @@ const tranformPrice = (price) => {
   return lastPrice
 };
 
+// Fonction qui permet de faire un retour sur la page précédente
 let element = document.getElementById('back-link');
 element.setAttribute('href', document.referrer);
 element.onclick = function() {

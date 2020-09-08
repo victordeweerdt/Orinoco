@@ -1,6 +1,4 @@
-// Dénomination UI des elements à cibler
-let cartContent = document.querySelector('.cart-content');
-let cartEmpty = document.querySelector('.cart-empty');
+
 
 // Fetch
 fetch('http://localhost:3000/api/cameras/')
@@ -17,6 +15,9 @@ fetch('http://localhost:3000/api/cameras/')
 
 // Vérifier si le panier est vide
 function checkCart() {
+  // Dénomination UI des elements à cibler
+  let cartContent = document.querySelector('.cart-content');
+  let cartEmpty = document.querySelector('.cart-empty');
   shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
   if (shoppingCart === null) {
       cartContent.style.display = "none";
@@ -82,11 +83,14 @@ function showItemsInCart() {
 
 // Grouper les cameras par iD
 function groupCameraById() {
-  shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-  return shoppingCart.reduce(function(h, obj) {
-    h[obj.camera.name] = (h[obj.camera.name] || []).concat(obj);
-    return h; 
-  },{})
+  if (localStorage.getItem('shoppingCart') === !undefined) {
+    shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+    return shoppingCart.reduce(function(h, obj) {
+      h[obj.camera.name] = (h[obj.camera.name] || []).concat(obj);
+      return h; 
+    },{})
+
+  }
 }
 
 // FUNCTIONS CONCERNANT L'AFFICHAGE DES LENTILLES

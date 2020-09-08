@@ -1,12 +1,6 @@
-// Dénomination UI des elements à cibler
-let cartContent = document.querySelector('.cart-content');
-let cartEmpty = document.querySelector('.cart-empty');
-
-// Fetch
+// FETCH pour afficher les produits dans le résumé du panier
 fetch('http://localhost:3000/api/cameras/')
-.then(function(response) {
-  return response.json();
-})
+.then(response => response.json())
 .then(function(json) {
   let cameras = json;
   console.log(cameras);
@@ -15,6 +9,7 @@ fetch('http://localhost:3000/api/cameras/')
 
 /// Fonction qui va afficher toutes les cameras du panier
 function showItemsInCart() {
+
   let shoppingCartGrouped = groupCameraById();
   console.log(shoppingCartGrouped);
   const cartItems = document.getElementById('cart-items');
@@ -160,20 +155,24 @@ document.forms["myForm"].addEventListener('submit', function(event) {
     inputs["phone"].style.border = "1px solid red";
     event.preventDefault();
     return false;
-  }
+  }  
+    
+  // FETCH qui va envoyer les données à l'API, puis va initialiser le panier
+  const postOrder = async function(data) {
+    let response = await fetch('http://localhost:3000/api/cameras/order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    let responseData = await response.json();
+    localStorage.setItem('orderId', responseData.orderId);
+    localStorage.setItem('shoppingCart', []);
+    // window.location = "../confirmation.html";
 
-  // Création d'une requète pour envoie des données client
-  // Sortir le tableau des produits avec un map
-  fetch('http://localhost:3000/api/cameras/order', {
-    method: 'post',
-    body: buildOrderData(shoppingCart, this)
-  }).then(function (response) {
-    return response.json();
-  }).then(function (text) {
-    console.log(text);
-    // window.location = 'confirmation.html';
-  })
-
+  };
+  return postOrder(buildOrderData(shoppingCart, this));
 });
 
 // Cette fonction va générer un nombre qui définira le numéro de commande
@@ -191,5 +190,8 @@ function buildOrderData(cart, inputs) {
        city: inputs[5].value,
        email: inputs[0].value
   }
-  return contact + products;
+  console.log(contact);
+  console.log(products);
+  return {
+    contact, products}
 }
