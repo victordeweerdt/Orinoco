@@ -1,4 +1,15 @@
-
+// Vérifier si le panier est vide
+function checkCart() {
+  let cartContent = document.querySelector('.cart-content');
+  let cartEmpty = document.querySelector('.cart-empty');
+  if (localStorage.getItem('shoppingCart') === null || localStorage.getItem('shoppingCart') === "" || localStorage.getItem('shoppingCart') === undefined) {
+    cartContent.style.display = "none";
+    return false;
+  } else {
+    return cartEmpty.style.display = "none";
+  }
+}
+checkCart();
 
 // Fetch
 fetch('http://localhost:3000/api/cameras/')
@@ -8,28 +19,17 @@ fetch('http://localhost:3000/api/cameras/')
 .then(function(json) {
   let cameras = json;
   console.log(cameras);
-  showItemsInCart();
-  checkCart();
+  showItemsInCart(cameras);
 })
-
-
-// Vérifier si le panier est vide
-function checkCart() {
-  // Dénomination UI des elements à cibler
-  let cartContent = document.querySelector('.cart-content');
-  let cartEmpty = document.querySelector('.cart-empty');
-  shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-  if (shoppingCart === null) {
-      cartContent.style.display = "none";
-  } else {
-      cartEmpty.style.display = "none";
-  }
-}
 
 
 /// Fonction qui va afficher toutes les cameras du panier
 function showItemsInCart() {
-  let shoppingCartGrouped = groupCameraById();
+  if (localStorage.getItem('shoppingCart') === null || localStorage.getItem('shoppingCart') === "" || localStorage.getItem('shoppingCart') === undefined) {
+    return false;
+  } else {
+    shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+    let shoppingCartGrouped = groupCameraById();
   console.log(shoppingCartGrouped);
   const cartItems = document.getElementById('cart-items');
     
@@ -69,7 +69,7 @@ function showItemsInCart() {
     // Liens avec les propriétés
     itemImage.src = shoppingCartGrouped[i][0].camera.imageUrl;
     itemName.innerText = shoppingCartGrouped[i][0].camera.name;
-    itemQty.innerText = "Quantity : " + shoppingCartGrouped[i].length;
+    itemQty.innerText = "Qty : " + shoppingCartGrouped[i].length;
     
     itemPrice.innerText = totalPrice + ' €';
     itemLenses.innerHTML = displayLensesPerName(i);
@@ -77,19 +77,21 @@ function showItemsInCart() {
 
     displayCart();
 
+    } 
   }
 };
 
 
 // Grouper les cameras par iD
-function groupCameraById() {
-  if (localStorage.getItem('shoppingCart') === !undefined) {
+function groupCameraById(shoppingCart) {
+  if (localStorage.getItem('shoppingCart') === null || localStorage.getItem('shoppingCart') === "" || localStorage.getItem('shoppingCart') === undefined) {
+    return false;
+  } else {
     shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     return shoppingCart.reduce(function(h, obj) {
       h[obj.camera.name] = (h[obj.camera.name] || []).concat(obj);
       return h; 
     },{})
-
   }
 }
 
@@ -115,9 +117,9 @@ function displayLensesPerName(camera) {
 
 
 // Calculer le total du panier
-function countTotalCart() {
+function countTotalCart(shoppingCart) {
   let som = 0;
-  this.shoppingCart.map(item => {
+  shoppingCart.map(item => {
       som += item.camera.price
   });
   return som;

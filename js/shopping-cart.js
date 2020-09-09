@@ -12,13 +12,13 @@ class Item {
 
 // Affichage du nombre d'article dans le panier displayCart()
 function displayCart() {
-  if (localStorage.getItem('shoppingCart') === null) {
+  if (localStorage.getItem('shoppingCart') === "" || localStorage.getItem('shoppingCart') === null || localStorage.getItem('shoppingCart') === undefined) {
     let countItem = document.querySelector('#count-items');
-    countItem.innerText = 0;
+    return countItem.innerText = 0;
   } else {
     let countItem = document.querySelector('#count-items');
     let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-    countItem.innerText = shoppingCart ? shoppingCart.length : 0;
+    return countItem.innerText = shoppingCart ? shoppingCart.length : 0;
   }
 }
 displayCart();

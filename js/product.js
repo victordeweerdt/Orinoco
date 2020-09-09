@@ -63,7 +63,9 @@ function eventListenerAddItemToCart(camera) {
     let item = new Item(camera, lense);
     // test
     console.log(item);
-    if (localStorage.getItem('shoppingCart') === null) {
+    if (localStorage.getItem('shoppingCart') === "") {
+      localStorage.setItem('shoppingCart', JSON.stringify([item]));
+    } else if (localStorage.getItem('shoppingCart') === null) {
       localStorage.setItem('shoppingCart', JSON.stringify([item]));
     } else {
       shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));

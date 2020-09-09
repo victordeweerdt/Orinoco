@@ -9,7 +9,7 @@ fetch('http://localhost:3000/api/cameras/')
 
 /// Fonction qui va afficher toutes les cameras du panier
 function showItemsInCart() {
-
+  let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
   let shoppingCartGrouped = groupCameraById();
   console.log(shoppingCartGrouped);
   const cartItems = document.getElementById('cart-items');
@@ -63,7 +63,7 @@ function showItemsInCart() {
 
 
 // Grouper les cameras par iD
-function groupCameraById() {
+function groupCameraById(shoppingCart) {
   shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
   return shoppingCart.reduce(function(h, obj) {
     h[obj.camera.name] = (h[obj.camera.name] || []).concat(obj);
@@ -93,9 +93,9 @@ function displayLensesPerName(camera) {
 
 
 // Calculer le total du panier
-function countTotalCart() {
+function countTotalCart(shoppingCart) {
   let som = 0;
-  this.shoppingCart.map(item => {
+  shoppingCart.map(item => {
       som += item.camera.price
   });
   return som;
@@ -105,7 +105,7 @@ function countTotalCart() {
 document.forms["myForm"].addEventListener('submit', function(event) {
 
   event.preventDefault();
-
+  let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
   let error = document.getElementById("error");
 
   let inputs = this;
@@ -169,7 +169,7 @@ document.forms["myForm"].addEventListener('submit', function(event) {
     let responseData = await response.json();
     localStorage.setItem('orderId', responseData.orderId);
     localStorage.setItem('shoppingCart', []);
-    // window.location = "../confirmation.html";
+    window.location = "confirmation.html";
 
   };
   return postOrder(buildOrderData(shoppingCart, this));
