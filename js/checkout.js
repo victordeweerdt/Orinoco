@@ -1,11 +1,20 @@
-// FETCH pour afficher les produits dans le résumé du panier
-fetch('http://localhost:3000/api/cameras/')
-.then(response => response.json())
-.then(function(json) {
-  let cameras = json;
-  console.log(cameras);
-  showItemsInCart();
-})
+// Je fais un fetch pour récuperer les informations sur mes camera, de mon API
+// --> JE FAIS UN TEST CASE
+const getCameras = async function() {
+  try {
+    let response = await fetch('http://localhost:3000/api/cameras/')
+    if (response.ok) {
+      let cameras = await response.json();
+      console.log(cameras);
+      showItemsInCart();
+    } else {
+      console.error('Retour du serveur: ', await response.status);
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+getCameras();
 
 /// Fonction qui va afficher toutes les cameras du panier
 function showItemsInCart() {
@@ -14,11 +23,9 @@ function showItemsInCart() {
   console.log(shoppingCartGrouped);
   const cartItems = document.getElementById('cart-items');
     
-  // On crée une boucle qui va parcourir l'objet cameras
-  for (let i in shoppingCartGrouped) {
-    let displayLensesGrouped = groupLensesByName(i);
-    console.log(displayLensesGrouped);
-    // Changer le i par camera
+  // On crée une boucle qui va parcourir l'objet shoppingCartGrouped
+  for (let camera in shoppingCartGrouped) {
+    let displayLensesGrouped = groupLensesByName(camera);
     let item = document.createElement('div');
     item.classList.add('item');
     let itemImage = document.createElement('img');
@@ -45,15 +52,15 @@ function showItemsInCart() {
     item.appendChild(itemPrice);
 
     // Calcule du prix total pour chaque camera
-    let totalPrice = tranformPrice(shoppingCartGrouped[i][0].camera.price)*shoppingCartGrouped[i].length;
+    let totalPrice = tranformPrice(shoppingCartGrouped[camera][0].camera.price)*shoppingCartGrouped[camera].length;
 
     // Liens avec les propriétés
-    itemImage.src = shoppingCartGrouped[i][0].camera.imageUrl;
-    itemName.innerText = shoppingCartGrouped[i][0].camera.name;
-    itemQty.innerText = "Qty : " + shoppingCartGrouped[i].length;
+    itemImage.src = shoppingCartGrouped[camera][0].camera.imageUrl;
+    itemName.innerText = shoppingCartGrouped[camera][0].camera.name;
+    itemQty.innerText = "Qty : " + shoppingCartGrouped[camera].length;
     
     itemPrice.innerText = totalPrice + ' €';
-    itemLenses.innerHTML = displayLensesPerName(i);
+    itemLenses.innerHTML = displayLensesPerName(camera);
     totalCart.innerText = tranformPrice(countTotalCart(shoppingCart));
 
     displayCart();
@@ -62,17 +69,23 @@ function showItemsInCart() {
 };
 
 
-// Grouper les cameras par iD
+// Grouper les cameras par iD -- Faire un reduce
+// --> FAIRE UN TEST CASE
 function groupCameraById(shoppingCart) {
-  shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-  return shoppingCart.reduce(function(h, obj) {
-    h[obj.camera.name] = (h[obj.camera.name] || []).concat(obj);
-    return h; 
-  },{})
+  if (localStorage.getItem('shoppingCart') === null || localStorage.getItem('shoppingCart') === "" || localStorage.getItem('shoppingCart') === undefined) {
+    return false;
+  } else {
+    shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+    return shoppingCart.reduce(function(h, obj) {
+      h[obj.camera.name] = (h[obj.camera.name] || []).concat(obj);
+      return h; 
+    },{})
+  }
 }
 
-// FUNCTIONS CONCERNANT L'AFFICHAGE DES LENTILLES
+// Affichage des lenses
 // Grouper les lenses par nom
+// --> FAIRE UN TEST CASE
 function groupLensesByName(camera) {
   let shoppingCartGrouped = groupCameraById();
   return shoppingCartGrouped[camera].reduce(function(h, obj) {
@@ -81,7 +94,8 @@ function groupLensesByName(camera) {
   },{})
 }
 
-// Afficher les lenses par nom
+// Puis afficher les lenses par nom
+// --> FAIRE UN TEST CASE
 function displayLensesPerName(camera) {
   let displayLensesGrouped = groupLensesByName(camera);
   result = '';
@@ -91,8 +105,9 @@ function displayLensesPerName(camera) {
   return result;
 }
 
-
+//
 // Calculer le total du panier
+// --> FAIRE UN TEST CASE
 function countTotalCart(shoppingCart) {
   let som = 0;
   shoppingCart.map(item => {
@@ -101,7 +116,8 @@ function countTotalCart(shoppingCart) {
   return som;
 }
 
-// SUBMIT LISTENER pour le submit du formulaire
+
+// EventListener - pour le submit du formulaire
 document.forms["myForm"].addEventListener('submit', function(event) {
 
   event.preventDefault();
@@ -157,7 +173,7 @@ document.forms["myForm"].addEventListener('submit', function(event) {
     return false;
   }  
     
-  // FETCH qui va envoyer les données à l'API, puis va initialiser le panier
+  // FETCH qui va envoyer les données à l'API, puis va initialiser le panier à 0
   const postOrder = async function(data) {
     let response = await fetch('http://localhost:3000/api/cameras/order', {
       method: 'POST',
@@ -175,14 +191,12 @@ document.forms["myForm"].addEventListener('submit', function(event) {
   return postOrder(buildOrderData(shoppingCart, this));
 });
 
-// Cette fonction va générer un nombre qui définira le numéro de commande
-function generateTrackingNumber() {
-  return Math.floor(Math.random() * 1000000);
-}
 
 // Cette fonction va construire l'element que l'on va envoyer lors du submit du formulaire
 function buildOrderData(cart, inputs) {
+  // Création du tableau de produits
   let products = cart.map(objectCamera => objectCamera.camera._id)
+  // Création de l'objet contact
   let contact = {
        firstName: inputs[1].value,
        lastName: inputs[2].value,
