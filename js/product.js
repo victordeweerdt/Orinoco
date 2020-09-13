@@ -1,22 +1,35 @@
 // Actualisation du panier dans le header
 displayCart();
 
+// Fonction qui permet de faire un retour sur la page précédente
+let element = document.getElementById('back-link');
+element.setAttribute('href', document.referrer);
+element.onclick = function() {
+  history.back();
+  return false;
+}
+
 // Je fais un fetch pour récuperer les informations sur ma camera, de mon API
-// --> JE FAIS UN TEST CASE
 const getCamera = async function() {
   try {
+    // On utilise la méthode URLSearchParams pour aller récuperer 
+    // l'id de la camera concernée dans l'URL de la page.
     let urlParams = new URLSearchParams(window.location.search);
     let myParam = urlParams.get('myParam');
     let id = urlParams.get('camera_id');
+    // On fait un fetch d'une seule caméra
     let response = await fetch('http://localhost:3000/api/cameras/' + id)
     if (response.ok) {
+      // On stocke l'objet dans la variable "camera"
       let camera = await response.json();
+      // On affiche ensuite les informations 
+      // ainsi que le bouton ajouter au panier
       showCameraInformation(camera);
       eventListenerAddItemToCart(camera);
-      console.log(camera);
     } else {
       console.error('Retour du serveur: ', await response.status);
     }
+    return response;
   } catch (e) {
     console.log(e)
   }
@@ -50,7 +63,8 @@ function showCameraInformation(camera) {
 		if (selectedKey == key) {
         selected = i;
     }
-    // J'utilise ici une méthode Options qui va créer des balises options pour chaque valeurs de lenses
+    // J'utilise ici une méthode Options 
+    // qui va créer des balises options pour chaque valeurs de lenses
 		selectelm.options[selectelm.length] = new Option(allLenses[key],allLenses[key]);
 		i++;
 	}
@@ -66,9 +80,11 @@ function eventListenerAddItemToCart(camera) {
   addToCart.addEventListener('click', function() {
     const lense = selectelm.value;
     let item = new Item(camera, lense);
+    // On vérifie que le shoppingCart n'est pas vide
     if (localStorage.getItem('shoppingCart') === null || localStorage.getItem('shoppingCart') === "" || localStorage.getItem('shoppingCart') === undefined) {
       localStorage.setItem('shoppingCart', JSON.stringify([item]));
     } else {
+      // s'il n'est pas vide, on ajoute le premier produit
       shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
       shoppingCart.push(item);
       localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));

@@ -1,31 +1,46 @@
 // Actualisation du panier dans le header
 displayCart();
 
-// Vérifier si le panier est vide
+// Fonction qui permet de faire un retour sur la page précédente
+let element = document.getElementById('back-link');
+element.setAttribute('href', document.referrer);
+element.onclick = function() {
+  history.back();
+  return false;
+}
+
+// Afficher le bon bloc en fonction de si le panier est vide ou non
 function checkCart() {
   let cartContent = document.querySelector('.cart-content');
   let cartEmpty = document.querySelector('.cart-empty');
+  // Si le shoppingCart est vide, on affiche un bloc 
+  // qui nous avertira que le panier est vide
+  // et si c'est le cas on stop le js de la page
   if (localStorage.getItem('shoppingCart') === null || localStorage.getItem('shoppingCart') === "" || localStorage.getItem('shoppingCart') === undefined) {
     cartContent.style.display = "none";
     return false;
   } else {
+    // Si le shoppingCart contient des produits,
+    // alors on affiche les cameras.
     return cartEmpty.style.display = "none";
   }
 }
 checkCart();
 
 // Je fais un fetch pour récuperer les informations sur mes camera, de mon API
-// --> JE FAIS UN TEST CASE
 const getCameras = async function() {
   try {
     let response = await fetch('http://localhost:3000/api/cameras/')
     if (response.ok) {
+      // Si on a une réponse, on stocke l'objet dans une variable "cameras"
       let cameras = await response.json();
       console.log(cameras);
+      // Puis on affiche les produits qui se trouve dans le panier
       showItemsInCart();
     } else {
       console.error('Retour du serveur: ', await response.status);
     }
+    return response;
   } catch (e) {
     console.log(e)
   }
@@ -38,14 +53,15 @@ function showItemsInCart() {
     return false;
   } else {
     shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+    // On fait appel à une fonction 
+    // qui grouper les cameras par id, puis on stocke le résultat
+    // dans une nouvelle variable.
     let shoppingCartGrouped = groupCameraById();
-    // Je vérifie mon shoppingCartGrouped 
-    // console.log(shoppingCartGrouped);
 
     // Je cible mon elem UI
     const cartItems = document.getElementById('cart-items');
     
-    // On crée une boucle qui va parcourir l'objet shoppingCartGrouped
+    // On crée une boucle qui va parcourir shoppingCartGrouped
     for (let camera in shoppingCartGrouped) {
       let displayLensesGrouped = groupLensesByName(camera);
       console.log(displayLensesGrouped);
@@ -81,7 +97,6 @@ function showItemsInCart() {
       itemImage.src = shoppingCartGrouped[camera][0].camera.imageUrl;
       itemName.innerText = shoppingCartGrouped[camera][0].camera.name;
       itemQty.innerText = "Qty : " + shoppingCartGrouped[camera].length;
-      
       itemPrice.innerText = totalPrice + ' €';
       itemLenses.innerHTML = displayLensesPerName(camera);
       totalCart.innerText = tranformPrice(countTotalCart(shoppingCart));
@@ -93,12 +108,12 @@ function showItemsInCart() {
 };
 
 
-// Grouper les cameras par iD -- Faire un reduce
-// --> FAIRE UN TEST CASE
+// Grouper les cameras par iD
 function groupCameraById(shoppingCart) {
   if (localStorage.getItem('shoppingCart') === null || localStorage.getItem('shoppingCart') === "" || localStorage.getItem('shoppingCart') === undefined) {
     return false;
   } else {
+    // On fait un reduce, ce qui va grouper les elements
     shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     return shoppingCart.reduce(function(h, obj) {
       h[obj.camera.name] = (h[obj.camera.name] || []).concat(obj);
@@ -108,8 +123,8 @@ function groupCameraById(shoppingCart) {
 }
 
 // Affichage des lenses
-// Grouper les lenses par nom
-// --> FAIRE UN TEST CASE
+// On va faire la même chose que pour les cameras, 
+// on groupe les lenses par leurs noms.
 function groupLensesByName(camera) {
   let shoppingCartGrouped = groupCameraById();
   return shoppingCartGrouped[camera].reduce(function(h, obj) {
@@ -118,8 +133,7 @@ function groupLensesByName(camera) {
   },{})
 }
 
-// Puis afficher les lenses par nom
-// --> FAIRE UN TEST CASE
+// Puis on les affiche sous forme de liste.
 function displayLensesPerName(camera) {
   let displayLensesGrouped = groupLensesByName(camera);
   result = '';
@@ -131,7 +145,6 @@ function displayLensesPerName(camera) {
 
 //
 // Calculer le total du panier
-// --> FAIRE UN TEST CASE
 function countTotalCart(shoppingCart) {
   let som = 0;
   shoppingCart.map(item => {

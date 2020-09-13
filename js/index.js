@@ -2,17 +2,19 @@
 displayCart();
 
 // Je fais un fetch pour récuperer les informations sur mes camera, de mon API
-// --> JE FAIS UN TEST CASE
 const getCameras = async function() {
   try {
     let response = await fetch('http://localhost:3000/api/cameras/')
     if (response.ok) {
+      // Je stock mon objet dans la variable "cameras" 
+      // pour ensuite l'utiliser dans ma fonction "showAllCameras()".
       let cameras = await response.json();
       console.log(cameras);
       showAllCameras(cameras);
     } else {
       console.error('Retour du serveur: ', await response.status);
     }
+    return response;
   } catch (e) {
     console.log(e)
   }
@@ -20,7 +22,6 @@ const getCameras = async function() {
 getCameras();
 
 // Fonction qui va afficher toutes les cameras de l'API
-// --> COMMENT JE FAIS UN TEST CASE DE CETTE FONCTION ?
 function showAllCameras(cameras) {
 
   // Ciblage des elements UI
@@ -37,6 +38,7 @@ function showAllCameras(cameras) {
     let productLink = document.createElement('a');
 
     // Ajout d'un query param pour chaque URL de chaque produit
+    // afin d'afficher la bonne caméra une fois arrivé sur la page produit.
     const newURL = `product.html?camera_id=${cameras[i]._id}`;
 
     // Ajout de class aux elements créés
@@ -55,7 +57,6 @@ function showAllCameras(cameras) {
     // Raccord aux propriétés de l'objet
     productImage.src = cameras[i].imageUrl;
     productName.innerHTML = cameras[i].name;
-    productPrice.innerHTML = tranformPrice(cameras[i].price) + " €"; 
-
+    productPrice.innerHTML = tranformPrice(cameras[i].price) + " €";
   }
 };

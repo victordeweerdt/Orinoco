@@ -1,15 +1,17 @@
 // Je fais un fetch pour récuperer les informations sur mes camera, de mon API
-// --> JE FAIS UN TEST CASE
 const getCameras = async function() {
   try {
     let response = await fetch('http://localhost:3000/api/cameras/')
     if (response.ok) {
+      // Si on a une réponse, on stocke l'objet dans une variable "cameras"
       let cameras = await response.json();
       console.log(cameras);
+      // Puis on affiche les produits qui se trouve dans le panier
       showItemsInCart();
     } else {
       console.error('Retour du serveur: ', await response.status);
     }
+    return response;
   } catch (e) {
     console.log(e)
   }
@@ -19,6 +21,9 @@ getCameras();
 /// Fonction qui va afficher toutes les cameras du panier
 function showItemsInCart() {
   let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+  // On fait appel à une fonction 
+  // qui grouper les cameras par id, puis on stocke le résultat
+  // dans une nouvelle variable.
   let shoppingCartGrouped = groupCameraById();
   console.log(shoppingCartGrouped);
   const cartItems = document.getElementById('cart-items');
@@ -58,7 +63,6 @@ function showItemsInCart() {
     itemImage.src = shoppingCartGrouped[camera][0].camera.imageUrl;
     itemName.innerText = shoppingCartGrouped[camera][0].camera.name;
     itemQty.innerText = "Qty : " + shoppingCartGrouped[camera].length;
-    
     itemPrice.innerText = totalPrice + ' €';
     itemLenses.innerHTML = displayLensesPerName(camera);
     totalCart.innerText = tranformPrice(countTotalCart(shoppingCart));
@@ -69,12 +73,12 @@ function showItemsInCart() {
 };
 
 
-// Grouper les cameras par iD -- Faire un reduce
-// --> FAIRE UN TEST CASE
+// Grouper les cameras par iD
 function groupCameraById(shoppingCart) {
   if (localStorage.getItem('shoppingCart') === null || localStorage.getItem('shoppingCart') === "" || localStorage.getItem('shoppingCart') === undefined) {
     return false;
   } else {
+    // On fait un reduce, ce qui va grouper les elements
     shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
     return shoppingCart.reduce(function(h, obj) {
       h[obj.camera.name] = (h[obj.camera.name] || []).concat(obj);
@@ -84,8 +88,8 @@ function groupCameraById(shoppingCart) {
 }
 
 // Affichage des lenses
-// Grouper les lenses par nom
-// --> FAIRE UN TEST CASE
+// On va faire la même chose que pour les cameras, 
+// on groupe les lenses par leurs noms.
 function groupLensesByName(camera) {
   let shoppingCartGrouped = groupCameraById();
   return shoppingCartGrouped[camera].reduce(function(h, obj) {
@@ -94,8 +98,7 @@ function groupLensesByName(camera) {
   },{})
 }
 
-// Puis afficher les lenses par nom
-// --> FAIRE UN TEST CASE
+// Puis on les affiche sous forme de liste.
 function displayLensesPerName(camera) {
   let displayLensesGrouped = groupLensesByName(camera);
   result = '';
@@ -107,7 +110,6 @@ function displayLensesPerName(camera) {
 
 //
 // Calculer le total du panier
-// --> FAIRE UN TEST CASE
 function countTotalCart(shoppingCart) {
   let som = 0;
   shoppingCart.map(item => {
@@ -126,17 +128,21 @@ document.forms["myForm"].addEventListener('submit', function(event) {
 
   let inputs = this;
   for (let i = 0; i < inputs.length; i++) {
+    // Je vais faire une boucle pour vérifier que chaque champ est bien rempli
+    // et lui donner une bordure rouge s'il est manquant.
     inputs[i].style.border = "1px solid #EAEAEA";
     if (!inputs[i].value && i != 3) {
       inputs[i].style.border = "1px solid red";
       error.innerHTML = "Please fill the field.";
       event.preventDefault();
-      break;
+      return false;
     }
   }
 
   // MES REGEX
   // Email
+  // Je lui demande de controler qu'il y a bien un @ et un .
+  // afin que ce soit une adresse valide.
   let myEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   if (!myEmailRegex.test(inputs["email"].value)) {
@@ -147,6 +153,8 @@ document.forms["myForm"].addEventListener('submit', function(event) {
   }
 
   // Names
+  // Je lui demande de controler qu'il y a bien que des lettres et quelques caractères spéciaux
+  // afin que ce soit un nom valide.
   let myNameRegex = /^[a-zA-Z-\s]+$/;
   if (!myNameRegex.test(inputs["name"].value)) {
     error.innerHTML = "Your name is incorrect.";
@@ -156,6 +164,8 @@ document.forms["myForm"].addEventListener('submit', function(event) {
   }
 
   // Zip
+  // Je lui demande de controler qu'il y a bien que des chiffres
+  // afin que ce soit un zip valide.
   let myZipRegex = /^[0-9\s]+$/;
   if (!myZipRegex.test(inputs["zip"].value)) {
     error.innerHTML = "Your zip code is incorrect.";
@@ -165,6 +175,8 @@ document.forms["myForm"].addEventListener('submit', function(event) {
   }
 
   // Phone number
+  // Je lui demande de controler qu'il y a bien que des chiffres
+  // afin que ce soit un numéro valide.
   let myPhoneRegex = /^\+?[0-9()\s]+$/;
   if (!myPhoneRegex.test(inputs["phone"].value)) {
     error.innerHTML = "Your phone number is incorrect.";
@@ -175,6 +187,7 @@ document.forms["myForm"].addEventListener('submit', function(event) {
     
   // FETCH qui va envoyer les données à l'API, puis va initialiser le panier à 0
   const postOrder = async function(data) {
+    // Je fais un POST, en précisant le type de contenu que j'envoie et ce que j'envoie.
     let response = await fetch('http://localhost:3000/api/cameras/order', {
       method: 'POST',
       headers: {
@@ -182,17 +195,23 @@ document.forms["myForm"].addEventListener('submit', function(event) {
       },
       body: JSON.stringify(data)
     })
+    // On récupère la réponse
     let responseData = await response.json();
+    // On stocke l'id correspondant à la réponse dans le localStorage
     localStorage.setItem('orderId', responseData.orderId);
-    localStorage.setItem('shoppingCart', []);
-    window.location = "confirmation.html";
-
   };
-  return postOrder(buildOrderData(shoppingCart, this));
+  postOrder(buildOrderData(shoppingCart, this));
+  // On remet à 0 le shoppingCart
+  localStorage.setItem('shoppingCart', []);
+  // On stocke le prix total dans le localStorage
+  localStorage.setItem('totalPrice', countTotalCart(shoppingCart));
+  // On part sur la page de confirmation
+  return window.location = "confirmation.html";
 });
 
 
-// Cette fonction va construire l'element que l'on va envoyer lors du submit du formulaire
+// Cette fonction va construire l'element 
+// que l'on va envoyer lors du submit du formulaire
 function buildOrderData(cart, inputs) {
   // Création du tableau de produits
   let products = cart.map(objectCamera => objectCamera.camera._id)
@@ -206,6 +225,7 @@ function buildOrderData(cart, inputs) {
   }
   console.log(contact);
   console.log(products);
+  // On retourne le tout dans un objet
   return {
     contact, products}
 }
